@@ -1,1 +1,615 @@
+<!doctype html>
+<html lang="it">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Consultazione titoli A-18</title>
+  <meta name="description" content="Portale istituzionale di consultazione dei titoli di accesso per la classe di concorso A-18.">
+  <style>
+    :root {
+      --bg: #f4f6f8;
+      --surface: #ffffff;
+      --surface-soft: #f8fafc;
+      --text: #172033;
+      --muted: #64748b;
+      --border: #dbe3ec;
+      --primary: #123c69;
+      --primary-dark: #0f2f54;
+      --accent: #d5a021;
+      --info-bg: #eef6ff;
+      --info: #17456f;
+      --warn-bg: #fff6df;
+      --warn: #7a5200;
+      --shadow: 0 10px 30px rgba(15, 23, 42, .08);
+      --radius: 18px;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.45;
+    }
+
+    .institutional-bar {
+      background: var(--primary);
+      color: #fff;
+      padding: 10px 22px;
+      font-size: 14px;
+    }
+    .institutional-bar .inner {
+      max-width: 1240px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    .app { max-width: 1240px; margin: 0 auto; padding: 22px; }
+
+    .hero {
+      background: linear-gradient(135deg, var(--primary), #1d578c);
+      color: #fff;
+      border-radius: 26px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero:after {
+      content: "";
+      position: absolute;
+      right: -80px;
+      top: -80px;
+      width: 260px;
+      height: 260px;
+      background: rgba(255,255,255,.08);
+      border-radius: 999px;
+    }
+    .hero-content {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 20px;
+      align-items: center;
+    }
+    .eyebrow {
+      display: inline-flex;
+      gap: 8px;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.14);
+      font-weight: 700;
+      font-size: 13px;
+    }
+    h1 { margin: 12px 0 8px; font-size: clamp(28px, 4vw, 44px); line-height: 1.05; }
+    h2, h3 { margin: 0; }
+    .hero p { margin: 0; color: rgba(255,255,255,.88); max-width: 760px; }
+    .hero-actions { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+    .btn {
+      appearance: none;
+      border: 1px solid transparent;
+      border-radius: 999px;
+      padding: 11px 16px;
+      background: var(--primary);
+      color: #fff;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .12s ease, background .12s ease, box-shadow .12s ease;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 14px;
+      min-height: 42px;
+    }
+    .btn:hover { transform: translateY(-1px); background: var(--primary-dark); box-shadow: 0 8px 18px rgba(18,60,105,.16); }
+    .btn.secondary { background: #fff; color: var(--primary); border-color: rgba(255,255,255,.45); }
+    .btn.light { background: #fff; color: var(--primary); border-color: var(--border); }
+    .btn.small { min-height: 34px; padding: 7px 11px; font-size: 13px; }
+
+    .tabs { margin: 18px 0; display: flex; gap: 8px; flex-wrap: wrap; }
+    .tab-btn { background: #fff; color: var(--primary); border: 1px solid var(--border); }
+    .tab-btn.active { background: var(--primary); color: #fff; border-color: var(--primary); }
+    .tab-panel { display: none; }
+    .tab-panel.active { display: block; }
+
+    .grid-main { display: grid; grid-template-columns: minmax(0, 1fr) 390px; gap: 18px; align-items: start; }
+    .stack { display: grid; gap: 18px; }
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+    }
+    .card-header {
+      padding: 18px 20px;
+      border-bottom: 1px solid var(--border);
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      gap: 14px;
+      align-items: center;
+    }
+    .card-header h2, .card-header h3 { font-size: 20px; }
+    .card-body { padding: 20px; }
+    .help { color: var(--muted); font-size: 14px; margin: 6px 0 0; }
+
+    .form-grid { display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 14px; }
+    .field { display: grid; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    label { font-weight: 700; font-size: 13px; color: #334155; }
+    input, select, textarea {
+      width: 100%;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 10px 12px;
+      background: #fff;
+      color: var(--text);
+      font: inherit;
+      min-height: 42px;
+      outline: none;
+    }
+    input:focus, select:focus, textarea:focus { border-color: var(--primary); box-shadow: 0 0 0 4px rgba(18,60,105,.12); }
+    textarea { resize: vertical; min-height: 94px; }
+
+    .notice { border-radius: 14px; padding: 14px; border: 1px solid #ffe19c; background: var(--warn-bg); color: var(--warn); font-size: 14px; }
+    .notice.info { background: var(--info-bg); color: var(--info); border-color: #bfd9f5; }
+    .summary-box { display: grid; gap: 10px; }
+    .summary-row { border-radius: 14px; padding: 12px; background: var(--surface-soft); font-size: 14px; }
+    .summary-row strong { display: block; margin-bottom: 3px; }
+
+    .search-panel {
+      display: grid;
+      gap: 14px;
+    }
+    .search-input-wrap { position: relative; }
+    .search-input-wrap:before {
+      content: "🔎";
+      position: absolute;
+      left: 14px;
+      top: 13px;
+      opacity: .55;
+      z-index: 2;
+    }
+    .search-input-wrap input { padding-left: 44px; min-height: 50px; font-size: 16px; }
+    .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+    .chip {
+      border: 1px solid var(--border);
+      background: #fff;
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 7px 10px;
+      font-weight: 700;
+      font-size: 13px;
+      cursor: pointer;
+    }
+    .chip:hover { border-color: var(--primary); }
+
+    .suggestions { display: grid; gap: 10px; }
+    .suggestion-card {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 14px;
+      background: #fff;
+    }
+    .suggestion-top { display: flex; justify-content: space-between; gap: 14px; align-items: flex-start; }
+    .suggestion-title { font-weight: 800; font-size: 16px; }
+    .suggestion-meta { margin-top: 4px; color: var(--muted); font-size: 13px; }
+    .score {
+      flex: 0 0 auto;
+      border-radius: 999px;
+      background: var(--info-bg);
+      color: var(--info);
+      border: 1px solid #bfd9f5;
+      padding: 6px 9px;
+      font-weight: 800;
+      font-size: 12px;
+    }
+    .tokens { margin-top: 10px; display: flex; flex-wrap: wrap; gap: 6px; }
+    .token { border-radius: 999px; padding: 4px 8px; background: var(--surface-soft); border: 1px solid #e8eef5; color: #334155; font-size: 12px; }
+    .empty { text-align: center; padding: 22px; color: var(--muted); border: 1px dashed var(--border); border-radius: 16px; background: var(--surface-soft); }
+
+    .title-group { margin-bottom: 18px; }
+    .title-list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-top: 14px; }
+    .title-item { background: var(--surface-soft); border: 1px solid #edf2f7; border-radius: 14px; padding: 12px; }
+    .title-item strong { display: block; }
+    .title-item small { color: var(--muted); }
+
+    .footer { margin: 24px 0 10px; color: var(--muted); font-size: 13px; text-align: center; }
+
+    mark { background: #fff0b8; color: inherit; padding: 0 2px; border-radius: 3px; }
+
+    @media (max-width: 980px) {
+      .hero-content, .grid-main { grid-template-columns: 1fr; }
+      .hero-actions { justify-content: flex-start; }
+    }
+    @media (max-width: 680px) {
+      .app { padding: 14px; }
+      .hero { padding: 22px; border-radius: 20px; }
+      .form-grid, .title-list { grid-template-columns: 1fr; }
+      .card-header { flex-direction: column; align-items: flex-start; }
+    }
+    @media print {
+      body { background: #fff; }
+      .institutional-bar, .no-print, .tabs, .footer { display: none !important; }
+      .app { max-width: none; padding: 0; }
+      .hero { background: #fff !important; color: #111827; border: 1px solid #cbd5e1; box-shadow: none; border-radius: 0; }
+      .hero:after { display: none; }
+      .hero p { color: #475569; }
+      .eyebrow { background: #eef2f7; color: #334155; }
+      .grid-main { grid-template-columns: 1fr; }
+      .card { box-shadow: none; border-color: #cbd5e1; break-inside: avoid; }
+      .card + .card { margin-top: 12px; }
+      input, select, textarea { border: 0; padding-left: 0; min-height: auto; }
+      .suggestion-card, .title-item { break-inside: avoid; }
+    }
+  </style>
+</head>
+<body>
+  <div class="institutional-bar no-print">
+    <div class="inner">
+      <span>Portale di consultazione — Classe di concorso A-18</span>
+      <span>Nessun dato viene salvato online dal sito</span>
+    </div>
+  </div>
+
+  <main class="app">
+    <header class="hero">
+      <div class="hero-content">
+        <div>
+          <span class="eyebrow">🛡️ Supporto alla segreteria</span>
+          <h1>Consultazione titoli A-18</h1>
+          <p>Ricerca assistita dei titoli di accesso alla classe A-18, con distinzione tra DM 39/1998, DM 22/2005, DM 270/2004 e diplomi accademici di II livello. La verifica resta sempre a cura della segreteria sul foglio MIM ufficiale.</p>
+        </div>
+        <div class="hero-actions no-print">
+          <button class="btn secondary" type="button" onclick="window.print()">🖨️ Stampa pagina</button>
+          <button class="btn secondary" type="button" id="clearBtn">↺ Pulisci ricerca</button>
+        </div>
+      </div>
+    </header>
+
+    <nav class="tabs no-print" aria-label="Sezioni del portale">
+      <button class="btn tab-btn active" data-tab="ricerca">🔎 Ricerca assistita</button>
+      <button class="btn tab-btn" data-tab="titoli">📚 Elenco titoli A-18</button>
+      <button class="btn tab-btn" data-tab="guida">📄 Guida operatore</button>
+    </nav>
+
+    <section id="tab-ricerca" class="tab-panel active">
+      <div class="grid-main">
+        <div class="stack">
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h2>Ricerca del titolo dichiarato</h2>
+                <p class="help">Scrivere anche solo alcune parole chiave. Esempi: pedagogia, psicologia, scienze educazione, sociologia, LM 85, filosofia.</p>
+              </div>
+            </div>
+            <div class="card-body search-panel">
+              <div class="field">
+                <label for="queryTitle">Titolo scritto dal candidato o parole riconoscibili</label>
+                <div class="search-input-wrap"><input id="queryTitle" autocomplete="off" placeholder="Es. scienze pedagogiche, pedagogia, LM85, psicologia, filosofia"></div>
+              </div>
+              <div class="chips no-print" aria-label="Ricerche rapide">
+                <button class="chip" data-example="pedagogia">pedagogia</button>
+                <button class="chip" data-example="psicologia">psicologia</button>
+                <button class="chip" data-example="filosofia">filosofia</button>
+                <button class="chip" data-example="sociologia">sociologia</button>
+                <button class="chip" data-example="scienze educazione">scienze educazione</button>
+                <button class="chip" data-example="LM 85">LM 85</button>
+                <button class="chip" data-example="LS 58">LS 58</button>
+              </div>
+              <div class="notice info">Il portale non decide se il candidato ha accesso. Mostra possibili corrispondenze e indica il gruppo normativo da consultare nel foglio MIM.</div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header">
+              <div>
+                <h2>Possibili corrispondenze</h2>
+                <p class="help">I risultati sono ordinati per somiglianza testuale e parole trovate. Controllare sempre manualmente il titolo effettivo.</p>
+              </div>
+            </div>
+            <div class="card-body">
+              <div id="suggestions" class="suggestions"></div>
+            </div>
+          </section>
+        </div>
+
+        <aside class="stack">
+          <section class="card">
+            <div class="card-header"><h2>Riepilogo per la segreteria</h2></div>
+            <div class="card-body summary-box">
+              <div class="summary-row"><strong>Funzione</strong><span>Ricerca e consultazione dei titoli, non verifica automatica.</span></div>
+              <div class="summary-row"><strong>Metodo</strong><span>Il sistema cerca parole chiave anche se il titolo non è scritto in modo perfetto.</span></div>
+              <div class="summary-row"><strong>Esito</strong><span>Mostra il gruppo normativo probabile e la nota da controllare nel foglio MIM.</span></div>
+              <div class="notice">La corrispondenza visualizzata è un aiuto operativo. La segreteria deve confermare titolo, note, equipollenze, eventuali integrazioni e requisiti previsti dalla normativa vigente.</div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="card-header"><h2>Gruppi normativi</h2></div>
+            <div class="card-body summary-box" id="groupSummary"></div>
+          </section>
+        </aside>
+      </div>
+    </section>
+
+    <section id="tab-titoli" class="tab-panel">
+      <section class="card">
+        <div class="card-header">
+          <div>
+            <h2>Elenco titoli A-18 per gruppo normativo</h2>
+            <p class="help">Elenco di consultazione diviso per decreto. Usare il foglio MIM per la verifica definitiva delle note.</p>
+          </div>
+          <a class="btn light no-print" href="https://www.mim.gov.it/-/decreto-ministeriale-n-255-del-22-dicembre-2023" target="_blank" rel="noopener">Apri pagina MIM ↗</a>
+        </div>
+        <div class="card-body">
+          <div class="search-input-wrap no-print"><input id="searchTitles" placeholder="Filtra l'elenco per titolo, codice, parola o nota"></div>
+          <div id="titlesContainer" style="margin-top:18px"></div>
+        </div>
+      </section>
+    </section>
+
+    <section id="tab-guida" class="tab-panel">
+      <section class="card">
+        <div class="card-header"><h2>Guida rapida per la segreteria</h2></div>
+        <div class="card-body">
+          <div class="title-list">
+            <div class="title-item"><strong>1. Copiare poche parole del titolo</strong><small>Non serve che il titolo sia scritto perfettamente. Bastano parole come pedagogia, psicologia, filosofia, sociologia, comunicazione.</small></div>
+            <div class="title-item"><strong>2. Guardare i possibili risultati</strong><small>Il portale indica il gruppo normativo e le note da controllare nel foglio ufficiale.</small></div>
+            <div class="title-item"><strong>3. Aprire il foglio MIM</strong><small>La decisione amministrativa deve essere fatta sulla Tabella A e sulle relative note.</small></div>
+            <div class="title-item"><strong>4. Stampare se utile</strong><small>La stampa serve come promemoria di consultazione, non come esito di verifica.</small></div>
+          </div>
+          <div class="notice info" style="margin-top:18px">Questa pagina è statica e può essere pubblicata su GitHub Pages. I dati inseriti restano nel browser e non vengono inviati a server o database.</div>
+          <div class="notice" style="margin-top:12px">Prima dell'uso istituzionale, allineare titoli e note con la Tabella A / A1 MIM vigente.</div>
+        </div>
+      </section>
+    </section>
+
+    <p class="footer">Consultazione titoli A-18 — strumento di supporto, non sostitutivo della valutazione amministrativa.</p>
+  </main>
+
+  <script>
+    const TITLE_GROUPS = [
+      {
+        id: "dm39_1998",
+        label: "DM 39/1998 — Vecchio ordinamento",
+        shortLabel: "Vecchio ordinamento",
+        ref: "Titoli di accesso DM 39/1998",
+        titles: [
+          ["Laurea in Filosofia", "Nota 1, Nota 2"],
+          ["Laurea in Lettere", "Nota 1"],
+          ["Laurea in Materie letterarie", "Nota 1"],
+          ["Laurea in Pedagogia", "Nota 1"],
+          ["Laurea in Psicologia", "Nota 1, Nota 2"],
+          ["Laurea in Scienze della comunicazione", "Nota 1"],
+          ["Laurea in Scienze dell'educazione", "Nota 1, Nota 2"],
+          ["Laurea in Scienze politiche", "Nota 1"],
+          ["Laurea in Sociologia", "Nota 1, Nota 2"],
+          ["Laurea in Storia", "Nota 1"]
+        ]
+      },
+      {
+        id: "dm22_2005",
+        label: "DM 22/2005 — Lauree specialistiche e integrazione vecchio ordinamento",
+        shortLabel: "Lauree specialistiche",
+        ref: "Titoli di accesso DM 22/2005",
+        titles: [
+          ["LS 1 - Antropologia culturale ed etnologia", "Nota 1"],
+          ["LS 17 - Filosofia e storia della scienza", "Nota 1"],
+          ["LS 18 - Filosofia teoretica, morale, politica ed estetica", "Nota 1"],
+          ["LS 56 - Programmazione e gestione dei servizi educativi e formativi", "Nota 1"],
+          ["LS 58 - Psicologia", "Nota 1"],
+          ["LS 59 - Pubblicità e comunicazione d'impresa", "Nota 1"],
+          ["LS 65 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 1"],
+          ["LS 67 - Scienze della comunicazione sociale e istituzionale", "Nota 1"],
+          ["LS 70 - Scienze della politica", "Nota 1"],
+          ["LS 72 - Scienze delle religioni", "Nota 1"],
+          ["LS 87 - Scienze pedagogiche", "Nota 1"],
+          ["LS 89 - Sociologia", "Nota 1"],
+          ["LS 96 - Storia della filosofia", "Nota 1"]
+        ]
+      },
+      {
+        id: "dm270_2004",
+        label: "DM 270/2004 — Lauree magistrali",
+        shortLabel: "Lauree magistrali",
+        ref: "Titoli di accesso Lauree magistrali DM 270/2004",
+        titles: [
+          ["LM 1 - Antropologia culturale ed etnologia", "Nota 1"],
+          ["LM 50 - Programmazione e gestione dei servizi educativi", "Nota 1"],
+          ["LM 51 - Psicologia", "Nota 1"],
+          ["LM 57 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 1"],
+          ["LM 59 - Scienze della comunicazione pubblica, d'impresa e pubblicità", "Nota 1"],
+          ["LM 62 - Scienze della politica", "Nota 1"],
+          ["LM 64 - Scienze delle religioni", "Nota 1"],
+          ["LM 78 - Scienze filosofiche", "Nota 1"],
+          ["LM 85 - Scienze pedagogiche", "Nota 1"],
+          ["LM 87 - Servizio sociale e politiche sociali", "Nota 1"],
+          ["LM 88 - Sociologia e ricerca sociale", "Nota 1"],
+          ["LM 93 - Teorie e metodologie dell'e-learning e della media education", "Nota 1"]
+        ]
+      },
+      {
+        id: "diplomi_accademici_ii",
+        label: "Diplomi accademici di II livello",
+        shortLabel: "Diplomi accademici II livello",
+        ref: "Sezione da controllare nella Tabella A MIM / AFAM, se applicabile",
+        titles: [["Diploma accademico di II livello — da verificare su Tabella A MIM", "Controllo manuale obbligatorio"]]
+      }
+    ];
+
+    const SYNONYMS = {
+      pedagogia: ["pedagogia", "pedagogiche", "pedagogico", "educazione", "educativi", "formazione", "formativi"],
+      psicologia: ["psicologia", "psicologico", "psicologiche"],
+      filosofia: ["filosofia", "filosofiche", "filosofico", "teoretica", "morale", "estetica"],
+      sociologia: ["sociologia", "sociologica", "sociologiche", "sociale", "sociali"],
+      comunicazione: ["comunicazione", "pubblicita", "impresa", "media"],
+      politica: ["politica", "politiche"],
+      storia: ["storia", "storiche", "storico"],
+      religioni: ["religioni", "religione"],
+      antropologia: ["antropologia", "antropologico", "etnologia"],
+      servizio: ["servizio", "servizi"]
+    };
+
+    const $ = (id) => document.getElementById(id);
+
+    function cleanText(value) {
+      return String(value || "")
+        .toLowerCase()
+        .replaceAll("à", "a")
+        .replaceAll("è", "e")
+        .replaceAll("é", "e")
+        .replaceAll("ì", "i")
+        .replaceAll("ò", "o")
+        .replaceAll("ù", "u")
+        .replaceAll("-", " ")
+        .replaceAll(",", " ")
+        .replaceAll(".", " ")
+        .replaceAll("/", " ")
+        .replaceAll("'", " ");
+    }
+
+    function words(value) {
+      return cleanText(value).split(" ").map(w => w.trim()).filter(w => w.length > 1);
+    }
+
+    function expandedWords(value) {
+      const base = words(value);
+      const expanded = new Set(base);
+      base.forEach(word => {
+        Object.keys(SYNONYMS).forEach(key => {
+          if (word === key || SYNONYMS[key].includes(word)) {
+            SYNONYMS[key].forEach(item => expanded.add(item));
+          }
+        });
+      });
+      return Array.from(expanded);
+    }
+
+    function allTitles() {
+      const rows = [];
+      TITLE_GROUPS.forEach(group => {
+        group.titles.forEach(title => {
+          rows.push({ group, name: title[0], notes: title[1], haystack: cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1]) });
+        });
+      });
+      return rows;
+    }
+
+    function scoreTitle(query, row) {
+      const raw = cleanText(query);
+      const queryWords = expandedWords(query);
+      if (!queryWords.length) return { score: 0, matches: [] };
+      let score = 0;
+      const matches = [];
+      queryWords.forEach(word => {
+        if (row.haystack.includes(word)) {
+          score += word.length >= 4 ? 3 : 1;
+          matches.push(word);
+        }
+      });
+      if (raw.length >= 3 && row.haystack.includes(raw)) score += 10;
+      const compactQuery = raw.split(" ").join("");
+      const compactTitle = row.haystack.split(" ").join("");
+      if (compactQuery.length >= 3 && compactTitle.includes(compactQuery)) score += 8;
+      return { score, matches: Array.from(new Set(matches)).slice(0, 8) };
+    }
+
+    function renderSuggestions() {
+      const query = $("queryTitle").value.trim();
+      const box = $("suggestions");
+      if (!query) {
+        box.innerHTML = `<div class="empty">Inserisci alcune parole del titolo dichiarato per vedere i possibili gruppi normativi.</div>`;
+        return;
+      }
+      const results = allTitles()
+        .map(row => ({ ...row, result: scoreTitle(query, row) }))
+        .filter(row => row.result.score > 0)
+        .sort((a, b) => b.result.score - a.result.score || a.name.localeCompare(b.name))
+        .slice(0, 12);
+
+      if (!results.length) {
+        box.innerHTML = `<div class="empty">Nessuna corrispondenza evidente. Provare con una parola più generale, per esempio pedagogia, psicologia, filosofia, sociologia, comunicazione.</div>`;
+        return;
+      }
+
+      box.innerHTML = results.map(row => {
+        const tokens = row.result.matches.map(token => `<span class="token">${escapeHtml(token)}</span>`).join("");
+        return `<article class="suggestion-card"><div class="suggestion-top"><div><div class="suggestion-title">${highlight(row.name, query)}</div><div class="suggestion-meta"><strong>${escapeHtml(row.group.label)}</strong><br>${escapeHtml(row.group.ref)} — ${escapeHtml(row.notes)}</div></div><span class="score">possibile</span></div><div class="tokens">${tokens}</div></article>`;
+      }).join("");
+    }
+
+    function renderTitlesList() {
+      const query = ($("searchTitles").value || "").trim();
+      const queryWords = expandedWords(query);
+      $("titlesContainer").innerHTML = TITLE_GROUPS.map(group => {
+        const titles = group.titles.filter(title => {
+          if (!queryWords.length) return true;
+          const hay = cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1]);
+          return queryWords.some(word => hay.includes(word));
+        });
+        if (!titles.length) return "";
+        return `<section class="title-group"><h3>${escapeHtml(group.label)}</h3><p class="help">Riferimento: ${escapeHtml(group.ref)}</p><div class="title-list">${titles.map(title => `<div class="title-item"><strong>${highlight(title[0], query)}</strong><small>${escapeHtml(title[1])}</small></div>`).join("")}</div></section>`;
+      }).join("") || `<div class="empty">Nessun titolo trovato con questo filtro.</div>`;
+    }
+
+    function renderGroupSummary() {
+      $("groupSummary").innerHTML = TITLE_GROUPS.map(group => `<div class="summary-row"><strong>${escapeHtml(group.shortLabel)}</strong><span>${group.titles.length} voce${group.titles.length === 1 ? "" : "i"} — ${escapeHtml(group.ref)}</span></div>`).join("");
+    }
+
+    function highlight(text, query) {
+      const q = words(query).filter(w => w.length >= 3);
+      if (!q.length) return escapeHtml(text);
+      const originalParts = String(text).split(" ");
+      return originalParts.map(part => {
+        const clean = cleanText(part);
+        const found = q.some(word => clean.includes(word));
+        return found ? `<mark>${escapeHtml(part)}</mark>` : escapeHtml(part);
+      }).join(" ");
+    }
+
+    function escapeHtml(value) {
+      return String(value ?? "").replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;").replaceAll('"', "&quot;");
+    }
+
+    document.addEventListener("click", (event) => {
+      const tabBtn = event.target.closest("[data-tab]");
+      if (tabBtn) {
+        document.querySelectorAll(".tab-btn").forEach(btn => btn.classList.remove("active"));
+        tabBtn.classList.add("active");
+        document.querySelectorAll(".tab-panel").forEach(panel => panel.classList.remove("active"));
+        $("tab-" + tabBtn.dataset.tab).classList.add("active");
+      }
+      const chip = event.target.closest("[data-example]");
+      if (chip) {
+        $("queryTitle").value = chip.dataset.example;
+        renderSuggestions();
+      }
+    });
+
+    $("queryTitle").addEventListener("input", renderSuggestions);
+    $("searchTitles").addEventListener("input", renderTitlesList);
+    $("clearBtn").addEventListener("click", () => {
+      $("queryTitle").value = "";
+      $("searchTitles").value = "";
+      renderSuggestions();
+      renderTitlesList();
+    });
+
+    renderGroupSummary();
+    renderSuggestions();
+    renderTitlesList();
+  </script>
+</body>
+</html>
 
