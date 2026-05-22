@@ -223,6 +223,17 @@
     .title-item { background: var(--surface-soft); border: 1px solid #edf2f7; border-radius: 14px; padding: 12px; }
     .title-item strong { display: block; }
     .title-item small { color: var(--muted); }
+    .note-detail {
+      margin-top: 8px;
+      padding: 9px 10px;
+      border-radius: 12px;
+      background: #fff;
+      border: 1px solid var(--border);
+      color: #334155;
+      font-size: 12px;
+      line-height: 1.35;
+    }
+    .note-detail strong { display: inline; }
 
     .footer { margin: 24px 0 10px; color: var(--muted); font-size: 13px; text-align: center; }
 
@@ -387,16 +398,16 @@
         shortLabel: "Vecchio ordinamento",
         ref: "Titoli di accesso DM 39/1998",
         titles: [
-          ["Laurea in Filosofia", "Nota 1, Nota 2"],
-          ["Laurea in Lettere", "Nota 1"],
-          ["Laurea in Materie letterarie", "Nota 1"],
-          ["Laurea in Pedagogia", "Nota 1"],
-          ["Laurea in Psicologia", "Nota 1, Nota 2"],
+          ["Laurea in Filosofia", "Nota 1, Nota 3"],
+          ["Laurea in Psicologia", "Nota 1, Nota 3"],
+          ["Laurea in Scienze dell'educazione", "Nota 1, Nota 3"],
           ["Laurea in Scienze della comunicazione", "Nota 1"],
-          ["Laurea in Scienze dell'educazione", "Nota 1, Nota 2"],
-          ["Laurea in Scienze politiche", "Nota 1"],
-          ["Laurea in Sociologia", "Nota 1, Nota 2"],
-          ["Laurea in Storia", "Nota 1"]
+          ["Laurea in Sociologia", "Nota 1, Nota 4"],
+          ["Laurea in Lettere", "Nota 2"],
+          ["Laurea in Materie letterarie", "Nota 2"],
+          ["Laurea in Scienze politiche", "Nota 2"],
+          ["Laurea in Storia", "Nota 2"],
+          ["Laurea in Pedagogia", "Nota 3"]
         ]
       },
       {
@@ -405,19 +416,19 @@
         shortLabel: "Lauree specialistiche",
         ref: "Titoli di accesso DM 22/2005",
         titles: [
-          ["LS 1 - Antropologia culturale ed etnologia", "Nota 1"],
-          ["LS 17 - Filosofia e storia della scienza", "Nota 1"],
-          ["LS 18 - Filosofia teoretica, morale, politica ed estetica", "Nota 1"],
-          ["LS 56 - Programmazione e gestione dei servizi educativi e formativi", "Nota 1"],
-          ["LS 58 - Psicologia", "Nota 1"],
-          ["LS 59 - Pubblicità e comunicazione d'impresa", "Nota 1"],
-          ["LS 65 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 1"],
-          ["LS 67 - Scienze della comunicazione sociale e istituzionale", "Nota 1"],
-          ["LS 70 - Scienze della politica", "Nota 1"],
-          ["LS 72 - Scienze delle religioni", "Nota 1"],
-          ["LS 87 - Scienze pedagogiche", "Nota 1"],
-          ["LS 89 - Sociologia", "Nota 1"],
-          ["LS 96 - Storia della filosofia", "Nota 1"]
+          ["LS 1 - Antropologia culturale ed etnologia", "Nota 5"],
+          ["LS 17 - Filosofia e storia della scienza", "Nota 5"],
+          ["LS 18 - Filosofia teoretica, morale, politica ed estetica", "Nota 5"],
+          ["LS 56 - Programmazione e gestione dei servizi educativi e formativi", "Nota 5"],
+          ["LS 58 - Psicologia", "Nota 5"],
+          ["LS 59 - Pubblicità e comunicazione d'impresa", "Nota 5"],
+          ["LS 65 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 5"],
+          ["LS 67 - Scienze della comunicazione sociale e istituzionale", "Nota 5"],
+          ["LS 70 - Scienze della politica", "Nota 5"],
+          ["LS 72 - Scienze delle religioni", "Nota 5"],
+          ["LS 87 - Scienze pedagogiche", "Nota 5"],
+          ["LS 89 - Sociologia", "Nota 5"],
+          ["LS 96 - Storia della filosofia", "Nota 5"]
         ]
       },
       {
@@ -426,18 +437,18 @@
         shortLabel: "Lauree magistrali",
         ref: "Titoli di accesso Lauree magistrali DM 270/2004",
         titles: [
-          ["LM 1 - Antropologia culturale ed etnologia", "Nota 1"],
-          ["LM 50 - Programmazione e gestione dei servizi educativi", "Nota 1"],
-          ["LM 51 - Psicologia", "Nota 1"],
-          ["LM 57 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 1"],
-          ["LM 59 - Scienze della comunicazione pubblica, d'impresa e pubblicità", "Nota 1"],
-          ["LM 62 - Scienze della politica", "Nota 1"],
-          ["LM 64 - Scienze delle religioni", "Nota 1"],
-          ["LM 78 - Scienze filosofiche", "Nota 1"],
-          ["LM 85 - Scienze pedagogiche", "Nota 1"],
-          ["LM 87 - Servizio sociale e politiche sociali", "Nota 1"],
-          ["LM 88 - Sociologia e ricerca sociale", "Nota 1"],
-          ["LM 93 - Teorie e metodologie dell'e-learning e della media education", "Nota 1"]
+          ["LM 1 - Antropologia culturale ed etnologia", "Nota 5"],
+          ["LM 50 - Programmazione e gestione dei servizi educativi", "Nota 5"],
+          ["LM 51 - Psicologia", "Nota 5"],
+          ["LM 57 - Scienze dell'educazione degli adulti e della formazione continua", "Nota 5"],
+          ["LM 59 - Scienze della comunicazione pubblica, d'impresa e pubblicità", "Nota 5"],
+          ["LM 62 - Scienze della politica", "Nota 5"],
+          ["LM 64 - Scienze delle religioni", "Nota 5"],
+          ["LM 78 - Scienze filosofiche", "Nota 5"],
+          ["LM 85 - Scienze pedagogiche", "Nota 5"],
+          ["LM 87 - Servizio sociale e politiche sociali", "Nota 5"],
+          ["LM 88 - Sociologia e ricerca sociale", "Nota 5"],
+          ["LM 93 - Teorie e metodologie dell'e-learning e della media education", "Nota 5"]
         ]
       },
       {
@@ -448,6 +459,14 @@
         titles: [["Diploma accademico di II livello — da verificare su Tabella A MIM", "Controllo manuale obbligatorio"]]
       }
     ];
+
+    const NOTE_TEXTS = {
+      "Nota 1": "Dette lauree sono titoli di ammissione al concorso purché il piano di studi seguito abbia compreso due corsi annuali, o quattro semestrali, delle discipline di ciascuna delle seguenti aree: filosofica, pedagogica, psicologica e sociologica.",
+      "Nota 2": "Dette lauree, purché conseguite entro l'A.A. 2000/2001, sono titoli di ammissione al concorso solo se il piano di studi seguito abbia compreso almeno un corso di discipline pedagogiche, uno di discipline psicologiche ed uno di discipline filosofiche.",
+      "Nota 3": "Dette lauree non sono più previste ai sensi del D.M. 23/1997.",
+      "Nota 4": "Detta laurea, conseguita entro l'A.A. 2000/2001, è titolo di ammissione al concorso purché il piano di studi seguito abbia compreso almeno un corso di discipline pedagogiche, uno di discipline psicologiche ed uno di discipline filosofiche.",
+      "Nota 5": "Con almeno 96 crediti nei settori scientifico-disciplinari M-FIL, M-STO, M-PED, M-PSI e SPS, di cui: 24 tra M-FIL/01, M-FIL/02, M-FIL/03 o 04, M-FIL/06 o 07 o 08, M-STO/05; 24 tra M-PED/01, M-PED/02, M-PED/04; 24 tra M-PSI/01, M-PSI/02, M-PSI/04, M-PSI/05 o 06; 24 tra SPS/07, SPS/08, SPS/09, SPS/11, SPS/12."
+    };
 
     const SYNONYMS = {
       pedagogia: ["pedagogia", "pedagogiche", "pedagogico", "educazione", "educativi", "formazione", "formativi"],
@@ -501,7 +520,8 @@
       const rows = [];
       TITLE_GROUPS.forEach(group => {
         group.titles.forEach(title => {
-          rows.push({ group, name: title[0], notes: title[1], haystack: cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1]) });
+          const noteDetails = getNoteDetails(title[1]).map(item => item.text).join(" ");
+          rows.push({ group, name: title[0], notes: title[1], noteDetails, haystack: cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1] + " " + noteDetails) });
         });
       });
       return rows;
@@ -546,7 +566,7 @@
 
       box.innerHTML = results.map(row => {
         const tokens = row.result.matches.map(token => `<span class="token">${escapeHtml(token)}</span>`).join("");
-        return `<article class="suggestion-card"><div class="suggestion-top"><div><div class="suggestion-title">${highlight(row.name, query)}</div><div class="suggestion-meta"><strong>${escapeHtml(row.group.label)}</strong><br>${escapeHtml(row.group.ref)} — ${escapeHtml(row.notes)}</div></div><span class="score">possibile</span></div><div class="tokens">${tokens}</div></article>`;
+        return `<article class="suggestion-card"><div class="suggestion-top"><div><div class="suggestion-title">${highlight(row.name, query)}</div><div class="suggestion-meta"><strong>${escapeHtml(row.group.label)}</strong><br>${escapeHtml(row.group.ref)} — ${escapeHtml(row.notes)}</div>${renderNoteDetails(row.notes)}</div><span class="score">possibile</span></div><div class="tokens">${tokens}</div></article>`;
       }).join("");
     }
 
@@ -556,12 +576,26 @@
       $("titlesContainer").innerHTML = TITLE_GROUPS.map(group => {
         const titles = group.titles.filter(title => {
           if (!queryWords.length) return true;
-          const hay = cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1]);
+          const hay = cleanText(group.label + " " + group.ref + " " + title[0] + " " + title[1] + " " + getNoteDetails(title[1]).map(item => item.text).join(" "));
           return queryWords.some(word => hay.includes(word));
         });
         if (!titles.length) return "";
-        return `<section class="title-group"><h3>${escapeHtml(group.label)}</h3><p class="help">Riferimento: ${escapeHtml(group.ref)}</p><div class="title-list">${titles.map(title => `<div class="title-item"><strong>${highlight(title[0], query)}</strong><small>${escapeHtml(title[1])}</small></div>`).join("")}</div></section>`;
+        return `<section class="title-group"><h3>${escapeHtml(group.label)}</h3><p class="help">Riferimento: ${escapeHtml(group.ref)}</p><div class="title-list">${titles.map(title => `<div class="title-item"><strong>${highlight(title[0], query)}</strong><small>${escapeHtml(title[1])}</small>${renderNoteDetails(title[1])}</div>`).join("")}</div></section>`;
       }).join("") || `<div class="empty">Nessun titolo trovato con questo filtro.</div>`;
+    }
+
+    function getNoteDetails(notes) {
+      return String(notes || "")
+        .split(",")
+        .map(note => note.trim())
+        .filter(note => NOTE_TEXTS[note])
+        .map(note => ({ label: note, text: NOTE_TEXTS[note] }));
+    }
+
+    function renderNoteDetails(notes) {
+      const details = getNoteDetails(notes);
+      if (!details.length) return "";
+      return `<div class="note-detail">${details.map(item => `<div><strong>${escapeHtml(item.label)}:</strong> ${escapeHtml(item.text)}</div>`).join("")}</div>`;
     }
 
     function renderGroupSummary() {
@@ -613,4 +647,3 @@
   </script>
 </body>
 </html>
-
